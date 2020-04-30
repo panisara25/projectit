@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<section class="section-hero overlay inner-page bg-image" style="background-image: url('static/images/hero_1.jpg');" id="home-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-7">
+          <h1 class="text-white font-weight-bold">Dashboard</h1>
+          <div class="custom-breadcrumbs">
+            <a href="#">Home</a> <span class="mx-2 slash">/</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="site-section">
+    <div class="container">
+
+        <div class="row mb-5 justify-content-center">
+          <div class="col-md-7 text-center">
+            <h2 class="section-title mb-2">Manage Jobs</h2>
+          </div>
+        </div>
+
+	
+      <table class="table table-hover">
+        <thead>
+				<tr>
+					<th>title</th>
+          <th>Type_Job</th>
+          <th>Date_posted</th>
+          <th>Manage</th>
+          <th></th>
+        </tr>
+      </thead>
+                {% for i in post %}
+					<tr>
+						<td>{{i.title}}</td>
+            <td>{{i.type_job}}</td>
+            <td>{{i.date_posted|date:"F d, Y"}}</td>
+                
+						<td> <a class="btn btn-sm btn" href="{% url 'post:update_post' i.id %}">
+              <i class="icon-cog"></i> Edit</a></td>
+
+						<td><a class="btn btn-sm btn-danger" href="{% url 'post:delete_post' i.id %}">Delete</a></td>
+
+					</tr>
+				{% endfor %}
+      </table>
+      <a class="btn btn-primary  btn-sm btn-block" href="{% url 'post:createPost' %}">Create Post</a>
+		</div>
+  </div> 
+</div>
+ </section>
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+  <!-- HOME -->
+  <section class="section-hero overlay inner-page bg-image" style="background-image: url('static/images/hero_1.jpg');" id="home-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-7">
+          <h1 class="text-white font-weight-bold"></h1>
+          <div class="custom-breadcrumbs">
+            <a href="#">Home</a> <span class="mx-2 slash">/</span>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="site-section">{% if user.is_authenticated %}
+    <div class="container">
+      <form  enctype="multipart/form-data" method="POST">
+      {% csrf_token %}
+      <div class="row">
+        <div class="col-lg-3">
+          <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <img class="border p-1 d-inline-block rounded-circle" src="{{user.profile.image.url}}" width="200" height="200">&nbsp;&nbsp;
+              <br> <br>
+            <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Profile</a>
+            <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Manage Job</a>
+          </div>
+        </div>
+
+   
+{% endblock %}

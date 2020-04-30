@@ -1,0 +1,219 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- HOME -->
+    <section class="home-section section-hero overlay bg-image" style="background-image: url('static/images/hero_1.jpg');" id="home-section">
+
+      <div class="container">
+        <div class="row align-items-center justify-content-center">
+          <div class="col-md-12">
+            <div class="mb-5 text-center">
+              <h1 class="text-white font-weight-bold">IT JOBS BOARD</h1>
+              <p>At Songkhla</p>
+            </div>
+            <form method="post" class="search-jobs-form">
+              <div class="row mb-5">
+                <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">                  
+                  <select class="selectpicker" data-style="btn-white btn-lg" data-width="100%" data-live-search="true" title="สายอาชีพ/ตำแหน่งงาน">
+                    <option>กราฟฟิค</option>
+                    <option>รักษาความปลอดภัยระบบสารสนเทศ</option>
+                    <option>บริหารระบบสารสนเทศ</option>
+                    <option>ซอฟต์แวร์ / เขียนโปรแกรม</option>
+                    <option>ที่ปรึกษา</option>
+                    <option>สนับสนุนด้านไอที</option>
+                    <option>เครือข่าย</option>
+                    <option>ฐานข้อมูล</option>
+                    <option>ตรวจสอบระบบสารสนเทศ / ทดสอบระบบ</option>
+                    <option>ฮาร์ดแวร์</option>
+                    <option>แอพพลิเคชั่นมือถือ</option>                    
+                  </select>
+                </div>
+                <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                  <select class="selectpicker" data-style="btn-white btn-lg" data-width="100%" data-live-search="true" title="พื้นที่ทำงาน">
+                    <option>เมืองสงขลา</option>
+                    <option>หาดใหญ่</option>
+                    <option>กระแสสินธุ์</option>
+                    <option>นาทวี</option>
+                    <option>รัตภูมิ</option>
+                    <option>นาหม่อม</option>
+                    <option>คลองหอยโข่ง</option>
+                    <option>ควนเนียง</option>
+                    <option>บางกล่ำ</option>
+                    <option>สทิงพระ</option>
+                    <option>สะเดา</option>
+                    <option>สะบ้าย้อย</option>
+                    <option>สิงหนคร</option>
+                    <option>จะนะ</option>
+                    <option>เทพา</option>
+                    <option>ระโนด</option>
+                  </select>
+                </div>
+                <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                  <select class="selectpicker" data-style="btn-white btn-lg" data-width="100%" data-live-search="true" title="ประเภทของงาน">
+                    <option>Part Time</option>
+                    <option>Full Time</option>
+                  </select>
+                </div>
+                <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                  <button type="submit" class="btn btn-primary btn-lg btn-block text-white btn-search"><span class="icon-search icon mr-2"></span>ค้นหางาน</button>
+                </div>
+              </div>
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <a href="#next" class="scroll-button smoothscroll">
+        <span class=" icon-keyboard_arrow_down"></span>
+      </a>
+
+    </section>
+    
+    <section class="site-section">
+      <div class="container">
+
+        <div class="row mb-5 justify-content-center">
+          <div class="col-md-7 text-center">
+            <h2 class="section-title mb-2">43,167 Job Listed</h2>
+          </div>
+        </div>
+        <table class="table">
+            <tr>
+                <th>ผู้ใช้</th>
+                <th>งาน</th>
+                <th>เวลา</th>
+            </tr>
+              {% for i in posts %}
+
+              <tr>
+                <td>{{ i.author }}</td>
+                <td>{{ i.title }}</td>
+                <td>{{ i.date_posted|date:"F d, Y"}}</td>
+            </tr>
+              {% endfor %}
+            
+        </table>
+        
+        <div class="row pagination-wrap">
+          <div class="col-md-6 text-center text-md-left mb-4 mb-md-0">
+            <span>Showing 1-7 Of 43,167 Jobs</span>
+          </div>
+          <div class="col-md-6 text-center text-md-right">
+            <div class="custom-pagination ml-auto">
+              <a href="#" class="prev">Prev</a>
+              <div class="d-inline-block">
+              <a href="#" class="active">1</a>
+              <a href="#">2</a>
+              <a href="#">3</a>
+              <a href="#">4</a>
+              </div>
+              <a href="#" class="next">Next</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="site-section services-section bg-light block__62849" id="next-section">
+      <div class="container">
+        
+        <div class="row">
+          <div class="col-6 col-md-6 col-lg-4 mb-4 mb-lg-5">
+
+            <a href="service-single.html" class="block__16443 text-center d-block">
+              <span class="custom-icon mx-auto"><span class="icon-magnet d-block"></span></span>
+              <h3>กราฟฟิคดีไซน์</h3>             
+            </a>
+
+          </div>
+          <div class="col-6 col-md-6 col-lg-4 mb-4 mb-lg-5">
+            
+            <a href="service-single.html" class="block__16443 text-center d-block">
+              <span class="custom-icon mx-auto"><span class="icon-trophy d-block"></span></span>
+              <h3>รักษาความปลอดภัยระบบสารสนเทศ</h3>              
+            </a>            
+
+          </div>
+          <div class="col-6 col-md-6 col-lg-4 mb-4 mb-lg-5">
+            
+            <a href="service-single.html" class="block__16443 text-center d-block">
+              <span class="custom-icon mx-auto"><span class="icon-laptop d-block"></span></span>
+              <h3>บริหารระบบสารสนเทศ</h3>             
+            </a>            
+
+          </div>
+          <div class="col-6 col-md-6 col-lg-4 mb-4 mb-lg-5">
+            
+            <a href="service-single.html" class="block__16443 text-center d-block">
+              <span class="custom-icon mx-auto"><span class="icon-search d-block"></span></span>
+              <h3>ซอฟต์แวร์/เขียนโปรแกรม</h3>             
+            </a>
+
+          </div>
+          <div class="col-6 col-md-6 col-lg-4 mb-4 mb-lg-5">
+            
+            <a href="service-single.html" class="block__16443 text-center d-block">
+              <span class="custom-icon mx-auto"><span class="icon-paper-plane d-block"></span></span>
+              <h3>ที่ปรึกษา</h3>            
+            </a>
+
+          </div>
+          <div class="col-6 col-md-6 col-lg-4 mb-4 mb-lg-5">
+            
+            <a href="service-single.html" class="block__16443 text-center d-block">
+              <span class="custom-icon mx-auto"><span class="icon-plug d-block"></span></span>
+              <h3>สนับสนุนด้านไอที</h3>             
+            </a>
+
+          </div>
+             <div class="row">
+          <div class="col-6 col-md-6 col-lg-4 mb-4 mb-lg-5">
+
+            <a href="service-single.html" class="block__16443 text-center d-block">
+              <span class="custom-icon mx-auto"><span class="icon-magnet d-block"></span></span>
+              <h3>เครือข่าย</h3>             
+            </a>
+
+          </div>
+          <div class="col-6 col-md-6 col-lg-4 mb-4 mb-lg-5">
+            
+            <a href="service-single.html" class="block__16443 text-center d-block">
+              <span class="custom-icon mx-auto"><span class="icon-trophy d-block"></span></span>
+              <h3>ฐานข้อมูล</h3>              
+            </a>            
+
+          </div>
+          <div class="col-6 col-md-6 col-lg-4 mb-4 mb-lg-5">
+            
+            <a href="service-single.html" class="block__16443 text-center d-block">
+              <span class="custom-icon mx-auto"><span class="icon-laptop d-block"></span></span>
+              <h3>ตรวจสอบระบบสารสนเทศ/ทดสอบระบบ</h3>             
+            </a>            
+
+          </div>
+          <div class="col-6 col-md-6 col-lg-4 mb-4 mb-lg-5">
+            
+            <a href="service-single.html" class="block__16443 text-center d-block">
+              <span class="custom-icon mx-auto"><span class="icon-search d-block"></span></span>
+              <h3>ฮาร์ดแวร์</h3>             
+            </a>
+
+          </div>
+          <div class="col-6 col-md-6 col-lg-4 mb-4 mb-lg-5">
+            
+            <a href="service-single.html" class="block__16443 text-center d-block">
+              <span class="custom-icon mx-auto"><span class="icon-paper-plane d-block"></span></span>
+              <h3>แอพพลิเคชั่นมือถือ</h3>            
+            </a>
+
+          
+
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
+{% endblock %}

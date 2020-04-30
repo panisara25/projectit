@@ -1,0 +1,67 @@
+
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+
+
+{% block content %}
+<link href="https://fonts.googleapis.com/css?family=Prompt&display=swap" rel="stylesheet">
+
+<style>
+h1 {
+  font-family: Prompt ;
+}
+
+</style>
+
+ <!-- HOME -->
+  <section class="section-hero overlay inner-page bg-image" style="background-image: url('static/images/hero_1.jpg');" id="home-section">
+  </section>
+
+ <section class="site-section">
+    <div class="container">
+
+      <div class="row align-items-center mb-5">
+        <div class="col-lg-8 mb-4 mb-lg-3">
+          <div class="d-flex align-items-center">
+            <div>
+              <h2>{{posts.title}}</h2>
+            </div>
+          </div>
+        </div>
+              <table class="table table-bordered ">
+                  <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Applicant(Name)</th>
+                    <th>Applicant(Lastname)</th>
+                    <th>Date_Apply</th>
+                    <th>Resume</th>
+                    <th>Contact</th>
+                    
+                  </tr>
+                </thead>
+                {% if posts.user.id == user.id %}{% if posts.post %}
+                  {% for applicant in posts.post.all %}
+                  <tr>
+                      <td>{{ forloop.counter}}</td>
+                      <td>{{ applicant.applicant.first_name }}</td>
+                      <td>{{ applicant.applicant.last_name }}</td>
+                      <td>{{ applicant.date_applied}}</td>
+                      <td><a href="{{ applicant.applicant.profile.resume.url}}" class="btn btn-primary btn-sm">Resume</a></td>
+                      <td>{{ applicant.contact_app}}</td>
+                        
+                  </tr>{% endfor %}{% endif %}
+                  {% else %}
+                  No Applicant
+
+                {% endif %}
+                </table>
+            
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+  {% endblock %}
+

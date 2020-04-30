@@ -1,0 +1,150 @@
+
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+
+
+{% block content %}
+<link href="https://fonts.googleapis.com/css?family=Prompt&display=swap" rel="stylesheet">
+
+<style>
+h1 {
+  font-family: Prompt ;
+}
+
+</style>
+
+
+ <!-- HOME -->
+ <section class="section-hero overlay inner-page bg-image" style="background-image: url('static/images/hero_1.jpg');" id="home-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-7">
+          <h1 class="text-white font-weight-bold">Company</h1>
+          <div class="custom-breadcrumbs">
+            <a href="#">Home</a> <span class="mx-2 slash">/</span>
+            <a href="#">Job</a> <span class="mx-2 slash">/</span>
+            <span class="text-white"><strong>Company</strong></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="site-section">{% if user.is_authenticated %}
+    <div class="container">
+      <form action="{% url 'editcompany' id=user.id %}" enctype="multipart/form-data" method="POST">
+      {% csrf_token %}
+      <div class="row">
+        <div class="col-lg-3">
+          <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <img class="border p-1 d-inline-block rounded-circle" src="{{user.companyprofile.com_img.url}}" width="200" height="200">&nbsp;&nbsp;
+              <br> <br>
+            <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Profile</a>
+            <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Manage Job</a>
+          </div>
+        </div>
+
+        <div class="col-lg-9">
+          <div class="tab-content" id="v-pills-tabContent">
+            <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+               <div class="row">  
+                <div class="col-sm-12">  
+              
+                    <div class="form-group">
+                        <h6 for="">ชื่อบริษัท</h6>
+                        <input type="text" name="company_name" class="form-control" value="{{user.companyprofile.company_name}}" >
+                    </div>
+
+                    <div class="form-group">
+                        <h6 for="">รายละเอียดบริษัท</h6>
+                        <textarea class="form-control" rows="5" id="company_detail" name="company_detail">{{user.companyprofile.company_detail}}</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <h6 for="">ที่อยู่บริษัท</h6>
+                         <textarea class="form-control" rows="5" id="company_address" name="company_address">{{user.companyprofile.company_address}}</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <h6 for="">สวัสดิการบริษัท</h6>
+                         <textarea class="form-control" rows="5" id="benifit" name="benifit">{{user.companyprofile.benifit}}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <h6 for="">การติดต่อ</h6>
+                         <textarea class="form-control" rows="5" id="contact" name="contact">{{user.companyprofile.contact}}</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <h6 for="">Upload Profile</h6>
+                        <input type='file' name="img" class="form-control" value="{{user.companyprofile.com_img.url}}" >
+                    </div>
+
+                    <div class="form-group">
+                        <h6 for="">หลักฐาน</h6>
+                        <input type='file' name="prove" class="form-control" value="{{companyprofile.prove.url}}"  > <br>
+                        <img class="border p-1 d-inline-block rounded" src="{{user.companyprofile.prove.url}}" width="150" height="100">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">บันทึก</button>
+                </div>
+            </div>
+          </form>
+      </div>
+
+            <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+              <table class="table table-hover">
+                  <thead>
+                  <tr>
+                    <th>title</th>
+                    <th>Type_Job</th>
+                    <th>Applicant</th>
+                    <th>Date_posted</th>
+                    <th>Manage</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                {% for i in post %}{% if i.user == user %}
+                  <tr> <a href="{% url 'post:post_detail' i.id  %}">
+                      <td><a href="{% url 'post:post_detail' i.id  %}">{{i.title}}</a></td>
+                      <td>{{i.type_job}}</td>
+                      <td>{{i.post.all.count}}</td>
+                      <td>{{i.date_posted|date:"F d, Y"}}</td>
+                        
+                      <td> <a class="btn btn-sm btn" href="{% url 'post:update_post' i.id %}">
+                        <i class="icon-cog"></i> Edit</a></td>
+
+                      <td><a class="btn btn-sm btn-danger" href="{% url 'post:delete_post' i.id %}">Delete</a></td>
+                      
+                  </tr> {% endif %}
+                  {% endfor %}
+                </table>
+                  <a class="btn btn-primary  btn-sm btn-block" href="{% url 'post:createPost' %}">Create Post</a>
+            </div>
+          </div>
+        </div>
+
+        </div>
+      </div>
+    </div>
+  {% else %}
+  <div class="container">
+  <div class="row">
+  <h1>เข้าสู่ระบบ</h2>
+  </div>
+  </div>
+  {% endif %}
+  </section>
+ 
+  
+  {% endblock content %}
+
+
+
+
+
+
+
+
+
+

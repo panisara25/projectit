@@ -1,0 +1,214 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+.modal-header {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 0.3rem;
+    outline: 0;
+}
+.modal-body {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 0.3rem;
+    outline: 0;
+}
+</style>
+ <section class="section-hero overlay inner-page bg-image" style="background-image: url('static/images/hero_1.jpg');" id="home-section">
+  </section>
+
+    <section class="site-section">
+      <div class="container">
+        <div class="row align-items-center mb-5">
+          <div class="col-lg-8 mb-4 mb-lg-0">
+            <div class="d-flex align-items-center">
+              <div class="border p-2 d-inline-block mr-3 rounded-circle">{% if posts.user == user %}
+                <img class="rounded-circle " src="{{user.companyprofile.com_img.url}}" width="200" height="200">
+                {% else %} 
+                <img class="rounded-circle " src="{{posts.user.companyprofile.com_img.url}}" width="200" height="200">
+                {% endif %}
+              </div>
+              <div>
+                <h2>{{ posts.title }}</h2>
+              <div>{% if posts.user == user %}
+                  <span class="ml-0 mr-2 mb-2"><span class="icon-briefcase mr-2"></span>{{user.companyprofile.company_name}}</span>
+                  {% else %} 
+                  <span class="ml-0 mr-2 mb-2"><span class="icon-briefcase mr-2"></span>{{posts.user.companyprofile.company_name}}</span>
+                  {% endif %}
+                  <span class="m-2"><span class="icon-room mr-2"></span>{{ posts.date_posted|date:"F d, Y"}}</span>
+                  <span class="m-2"><span class="icon-clock-o mr-2"></span><span class="text-primary">{{ posts.timestamp|timesince }} ago</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-lg-4">
+            <div class="row">
+              <div class="col-6">
+                
+              </div>
+              {% if posts.user == user %}
+              <div class="col-6">
+                <a href="" class="btn btn-block btn-primary btn-md">Apply Now</a>
+              </div>
+              {% else %}{% if user.is_authenticated %}
+              <div class="col-6">
+                <a href="#" class="btn btn-block btn-primary btn-md"data-toggle="modal" data-target="#ApplicationForm">Apply Now</a>
+              </div>
+              
+              {% else %}
+              <div class="col-6">
+                <a href="" class="btn btn-block btn-primary btn-md">Apply Now</a>
+              </div>
+             {% endif %} {% endif %}
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="mb-5">
+              <br>
+              <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span class="icon-align-left mr-3"></span>รายละเอียดงาน</h3>
+              <p>{{ posts.description}} </p>
+            </div>
+
+            <div class="mb-5">
+              <br>
+              <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span class="icon-align-left mr-3"></span>คุณสมบัติ</h3>
+              <p>{{ posts.requirement}} </p>
+            </div>
+
+    
+            <div class="mb-5">
+              <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span class="icon-rocket mr-3"></span>เกี่ยวกับบริษัท</h3>
+              <ul class="list-unstyled m-0 p-0">{% if posts.user == user %}
+                <li class="d-flex align-items-start mb-2"><span class="icon-check_circle mr-2 text-muted"></span><span>{{user.companyprofile.company_detail}}</span></li>
+                {%else %}
+                <li class="d-flex align-items-start mb-2"><span class="icon-check_circle mr-2 text-muted"></span><span>{{posts.user.companyprofile.company_detail}}</span></li>
+                {% endif %}
+              </ul>
+            </div>
+
+            <div class="mb-5">
+              <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span class="icon-turned_in mr-3"></span>สวัสดิการบริษัท</h3>
+              <ul class="list-unstyled m-0 p-0">{% if posts.user == user %}
+                <li class="d-flex align-items-start mb-2"><span class="icon-check_circle mr-2 text-muted"></span><span>{{user.companyprofile.benifit}}</span></li>
+              {%else %} 
+                <li class="d-flex align-items-start mb-2"><span class="icon-check_circle mr-2 text-muted"></span><span>{{posts.user.companyprofile.benifit}}</span></li>
+              {% endif %}
+              </ul>
+            </div>
+
+            <div class="mb-5">
+              <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span class="icon-turned_in mr-3"></span>ช่องทางการติดต่อ</h3>
+              <ul class="list-unstyled m-0 p-0">{% if posts.user == user %}
+                <li class="d-flex align-items-start mb-2"><span class="icon-check_circle mr-2 text-muted"></span><span>{{user.companyprofile.contact}}</span></li>
+              {%else %} 
+                <li class="d-flex align-items-start mb-2"><span class="icon-check_circle mr-2 text-muted"></span><span>{{posts.user.companyprofile.contact}}</span></li>
+              {% endif %}
+              </ul>
+            </div>
+
+            
+            <div class="mb-5">
+              <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span class="icon-turned_in mr-3"></span>ที่อยู่บริษัท</h3>
+              <ul class="list-unstyled m-0 p-0">{% if posts.user == user %}
+                <li class="d-flex align-items-start mb-2"><span class="icon-check_circle mr-2 text-muted"></span><span>{{user.companyprofile.company_address}}</span></li>
+              {%else %} 
+                <li class="d-flex align-items-start mb-2"><span class="icon-check_circle mr-2 text-muted"></span><span>{{posts.user.companyprofile.company_address}}</span></li>
+              {% endif %}
+              </ul>
+            </div>
+
+          </div>
+          <div class="col-lg-4">
+            <div class="bg-light p-3 border rounded mb-4">
+              <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">Job Summary</h3>
+              <ul class="list-unstyled pl-3 mb-0">
+                <li class="mb-2"><strong class="text-black">Published on:</strong> {{ posts.date_posted|date:"F d, Y"}}</li>
+                <li class="mb-2"><strong class="text-black">Vacancy:</strong> {{posts.vacancy}}</li>
+                <li class="mb-2"><strong class="text-black">Employment Status:</strong> {{posts.type_job}}</li>
+                <li class="mb-2"><strong class="text-black">Job Location:</strong>{{posts.location}}</li>
+                <li class="mb-2"><strong class="text-black">Salary:</strong> {{posts.salary}}</li>
+                <li class="mb-2"><strong class="text-black">Gender:</strong> {{posts.gender}}</li>
+                <li class="mb-2"><strong class="text-black">บัตรตัวแทนบริษัท</strong></li>
+                {% if posts.user == user %}
+                <img class="border p-1 d-inline-block rounded" src="{{user.companyprofile.prove.url}}" width="250" height="160">
+                {%else %} 
+                <img class="border p-1 d-inline-block rounded" src="{{posts.user.companyprofile.prove.url}}" width="250" height="160">
+                {% endif %}
+              </ul>
+            </div>
+ 
+  {% if posts.user.id == user.id %}
+      <div class="bg-light p-3 border rounded">
+          <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">Applicants
+          <a href="{% url 'post:list_app' posts.id %}" class="btn btn-primary btn-sm">View</a></h3>
+            {% if posts.post %}
+              {% for applicant in posts.post.all %}
+              <div class="px-3">
+                <img src="{{ applicant.applicant.profile.image.url }}" style="height:32px; width:32px;"/></a>
+                <small class="text-muted">{{ applicant.applicant.first_name }} {{ applicant.applicant.last_name }}</small>
+              </div>
+              {% endfor %}
+            {% else %}
+              <div class="px-3">
+                <small class="text-muted">No Applicants</small>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  {% else %}
+  </section>
+    <div class="modal fade" id="ApplicationForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Application Form</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" encytpe="multipart/form-data">
+                    {% csrf_token %}
+                   <p>รายละเอียดเพิ่มเติม(เช่น ผลงาน,ประสบการณ์,งานอดิเรก){{ form.description }}</p>
+                  <p>ช่องทางการติดต่อ(เบอร์โทร,Facebook,Line){{ form.contact_app }}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-dark" >Apply</button>
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+  {% endif %}
+</body>
+</html>
+{% endblock %}
